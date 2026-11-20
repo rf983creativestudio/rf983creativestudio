@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://rf983creativestudio.github.io/sitemap.xml
+
+Sitemap: https://rf983creativestudio.github.io/rf983creativestudio/sitemap.xml
