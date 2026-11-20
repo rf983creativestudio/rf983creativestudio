@@ -22,3 +22,8 @@
 .art-e{background:linear-gradient(135deg,#d8c8a8,#eee5d4);color:#28382f}
 .art-e strong{font-size:42px}
 @media(max-width:520px){.concept-art{height:210px}}
+
+/* Contact enquiry form refinements */
+.form-panel textarea{min-height:118px}
+.form-panel input::placeholder,.form-panel textarea::placeholder{color:#858ba0;font-size:12px}
+.form-panel .form-note{line-height:1.6}
