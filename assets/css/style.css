@@ -29,8 +29,8 @@
 .form-panel .form-note{line-height:1.6}
 
 /* Additional portfolio concept artwork */
-.art-f{background:linear-gradient(135deg,#26333c,#d4a96b 58%,#f0dfbd);color:#17212a}.art-f strong{font-family:Georgia,serif;font-size:42px}
-.art-g{background:radial-gradient(circle at 80% 25%,#d6bd87 0 7%,transparent 8%),linear-gradient(135deg,#283d31,#78856b 58%,#d7c6a0)}.art-g strong{font-family:Georgia,serif;color:#f2ead8}
-.art-h{background:linear-gradient(135deg,#f0c7a6,#b96f51 55%,#6d3e35);color:#33231f}.art-h strong{font-family:Georgia,serif;font-size:44px}
-.art-i{background:radial-gradient(circle at 72% 42%,#edb84f 0 4%,transparent 5%),linear-gradient(130deg,#171c35,#533c78 58%,#bd6e63)}.art-i strong{font-family:Arial,sans-serif;font-weight:800;letter-spacing:-.05em}
-.art-j{background:linear-gradient(135deg,#1d352d,#60775d 58%,#c5b68e)}.art-j strong{font-family:Georgia,serif;color:#f1eadb}
+.art-f{background:radial-gradient(circle at 78% 28%,rgba(255,239,180,.9) 0 5%,transparent 6%),linear-gradient(125deg,#174b68 0%,#287f91 42%,#e5a84b 100%);color:#fff9e9}.art-f strong{font-family:Georgia,serif;font-size:42px;text-shadow:0 2px 14px rgba(15,34,47,.28)}
+.art-g{background:radial-gradient(circle at 78% 24%,#f7d86b 0 8%,transparent 9%),radial-gradient(circle at 18% 88%,rgba(233,155,75,.8),transparent 34%),linear-gradient(135deg,#174c3b,#4e8d5b 56%,#b5a45b)}.art-g strong{font-family:Georgia,serif;color:#fff5d9;text-shadow:0 2px 12px rgba(16,42,31,.3)}
+.art-h{background:radial-gradient(circle at 82% 22%,#ffd99b 0 7%,transparent 8%),linear-gradient(135deg,#9d3d42 0%,#dc7657 52%,#f0b46f 100%);color:#fff8ec}.art-h strong{font-family:Georgia,serif;font-size:44px;text-shadow:0 2px 12px rgba(74,24,31,.3)}
+.art-i{background:radial-gradient(circle at 72% 42%,#ffe16b 0 5%,transparent 6%),radial-gradient(circle at 18% 80%,#ed6c73 0 10%,transparent 11%),linear-gradient(130deg,#242d68 0%,#6749a5 54%,#bd5b87 100%)}.art-i strong{font-family:Arial,sans-serif;font-weight:800;letter-spacing:-.05em;color:#fff8ee;text-shadow:0 2px 12px rgba(15,12,48,.35)}
+.art-j{background:radial-gradient(circle at 82% 24%,#f4d27b 0 7%,transparent 8%),linear-gradient(135deg,#155b57 0%,#398a76 48%,#9a9c55 100%)}.art-j strong{font-family:Georgia,serif;color:#fff5df;text-shadow:0 2px 12px rgba(15,48,43,.3)}
