@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   electric:{bg:"#17123b",accent:"#ff5ca8",light:"#b9fff4"},
   earth:{bg:"#243b32",accent:"#d58a54",light:"#e8d9b9"},
   sunset:{bg:"#3b1838",accent:"#ff795e",light:"#ffc96b"},
-  ice:{bg:"#102c43",accent:"#62b9e8",light:"#d5f1f3"}
+  ice:{bg:"#102c43",accent:"#62b9e8",light:"#d5f1f3"},
+  citrus:{bg:"#263b24",accent:"#d7ef55",light:"#f5f1d5"},
+  rose:{bg:"#351b2b",accent:"#ff8eb5",light:"#ffe0e8"}
  };
  let palette="gold",type="editorial",texture="orbit",layout="editorial";
  const sync=()=>{outTitle.textContent=title.value.trim()||"Your idea here.";outSubtitle.textContent=subtitle.value.trim()||"Add a line to bring your idea to life.";};
@@ -64,6 +66,7 @@ document.addEventListener("DOMContentLoaded",()=>{
    if(texture==="grid"){for(let x=0;x<w;x+=48){ctx.globalAlpha=.13;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}for(let y=0;y<h;y+=48){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}}
    if(texture==="orbit"||texture==="grain"){ctx.globalAlpha=.45;[280,390,500].forEach((r,i)=>{ctx.beginPath();ctx.arc(930,430,r,0,Math.PI*2);ctx.stroke();});}
    if(texture==="grain"){let seed=19;ctx.fillStyle=light;ctx.globalAlpha=.14;for(let i=0;i<1600;i++){seed=(seed*9301+49297)%233280;const x=seed/233280*w;seed=(seed*9301+49297)%233280;const y=seed/233280*h;ctx.fillRect(x,y,2,2);}}
+   if(texture==="rays"){ctx.save();ctx.translate(930,430);ctx.globalAlpha=.16;ctx.strokeStyle=accent;ctx.lineWidth=2;for(let angle=0;angle<Math.PI*2;angle+=Math.PI/30){ctx.beginPath();ctx.moveTo(Math.cos(angle)*120,Math.sin(angle)*120);ctx.lineTo(Math.cos(angle)*760,Math.sin(angle)*760);ctx.stroke();}ctx.restore();}
    ctx.globalAlpha=1;ctx.fillStyle=accent;ctx.font="italic 46px Georgia";ctx.fillText("RF983",88,115);
    ctx.fillStyle=accent;ctx.font="500 17px Arial";ctx.letterSpacing="5px";ctx.fillText("A CREATIVE STUDY",90,610);
    const heading=title.value.trim()||"Your idea here.",words=heading.split(/\s+/);let lines=[],line="";
@@ -182,4 +185,39 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(bar)bar.value=percent;if(label)label.textContent=percent+"% complete";
  };
  form.addEventListener("input",update);form.addEventListener("change",update);update();
+});
+
+/* RF983 final evolution: service mix, enquiry prefill and graceful transitions */
+document.addEventListener("DOMContentLoaded",()=>{
+ const choices=[...document.querySelectorAll("[data-service-choice]")];
+ const serviceLink=document.querySelector("[data-service-link]");
+ const mixerStatus=document.querySelector("[data-mixer-status]");
+ const updateMix=()=>{
+  if(!serviceLink)return;
+  const selected=choices.filter(item=>item.checked).map(item=>item.value);
+  const url=new URL("contact.html",window.location.href);
+  if(selected.length)url.searchParams.set("services",selected.join(", "));
+  serviceLink.href=url.pathname+url.search;
+  if(mixerStatus)mixerStatus.textContent=selected.length?selected.length+" discipline"+(selected.length===1?"":"s")+" selected: "+selected.join(", "):"Choose one or more disciplines to shape your enquiry.";
+  serviceLink.textContent=selected.length?"Continue with "+selected.length+" selected ↗":"Continue to project enquiry ↗";
+ };
+ choices.forEach(item=>item.addEventListener("change",updateMix));
+ updateMix();
+
+ const params=new URLSearchParams(window.location.search);
+ const requested=(params.get("services")||"").split(",").map(value=>value.trim()).filter(Boolean);
+ const serviceSelect=document.querySelector("[data-service-select]");
+ const goalField=document.querySelector("[data-goal-field]");
+ if(requested.length&&serviceSelect){
+  const options=[...serviceSelect.options].map(option=>option.value||option.textContent.trim());
+  const valid=requested.filter(value=>options.includes(value));
+  if(valid.length===1)serviceSelect.value=valid[0];
+  else if(valid.length>1)serviceSelect.value="Multiple services";
+  if(goalField&&!goalField.value.trim())goalField.value="I'm interested in exploring: "+valid.join(", ")+".\n\nMy project goals are: ";
+ }
+
+ /* Cross-document View Transitions are progressive enhancement only. */
+ if("startViewTransition" in document && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  document.documentElement.classList.add("rf-view-transitions-ready");
+ }
 });
