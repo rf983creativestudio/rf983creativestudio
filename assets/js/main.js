@@ -18,3 +18,37 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll(".service-card,.portfolio-card,.concept-case-app").forEach(card=>card.addEventListener("pointermove",event=>{const rect=card.getBoundingClientRect();card.style.setProperty("--pointer-x",(event.clientX-rect.left)+"px");card.style.setProperty("--pointer-y",(event.clientY-rect.top)+"px");}));
  }
 });
+
+
+/* RF983 immersive portfolio previews */
+document.addEventListener("DOMContentLoaded",()=>{
+ const cards=[...document.querySelectorAll(".concept-card")];
+ if(!cards.length||document.querySelector("#rf-project-preview"))return;
+ const dialog=document.createElement("dialog");
+ dialog.id="rf-project-preview";
+ dialog.className="rf-preview";
+ dialog.setAttribute("aria-labelledby","rf-preview-title");
+ dialog.innerHTML='<div class="rf-preview-inner"><button class="rf-preview-close" type="button" aria-label="Close project preview">×</button><div class="rf-preview-art"></div><div class="rf-preview-copy"><p class="eyebrow">RF983 / CONCEPT PREVIEW</p><h2 id="rf-preview-title"></h2><p class="rf-preview-description"></p><div class="rf-preview-tags"></div><a class="btn gold rf-preview-link" href="#">Explore full case study ↗</a><p class="rf-preview-note">Self-initiated concept study — not commissioned client work.</p></div></div>';
+ document.body.append(dialog);
+ const art=dialog.querySelector(".rf-preview-art"),title=dialog.querySelector("#rf-preview-title"),description=dialog.querySelector(".rf-preview-description"),tags=dialog.querySelector(".rf-preview-tags"),link=dialog.querySelector(".rf-preview-link");
+ cards.forEach(card=>{
+  const caseLink=card.querySelector(".case-link");
+  const preview=document.createElement("button");
+  preview.type="button";preview.className="rf-preview-trigger";preview.textContent="Quick preview ↗";
+  preview.setAttribute("aria-label","Quick preview: "+(card.querySelector("h3")?.textContent||"project"));
+  if(caseLink)caseLink.insertAdjacentElement("beforebegin",preview);
+  else card.append(preview);
+  preview.addEventListener("click",()=>{
+   const artwork=card.querySelector(".concept-art");
+   art.replaceChildren(artwork?artwork.cloneNode(true):document.createElement("div"));
+   title.textContent=card.querySelector("h3")?.textContent||"Project concept";
+   description.textContent=card.querySelector(":scope > p")?.textContent||"Explore this creative direction.";
+   tags.replaceChildren(...[...(card.querySelectorAll(".tags span"))].map(item=>{const tag=document.createElement("span");tag.textContent=item.textContent;return tag;}));
+   link.href=caseLink?.getAttribute("href")||"contact.html";
+   link.textContent=caseLink?"Explore full case study ↗":"Discuss a project ↗";
+   dialog.showModal();
+  });
+ });
+ dialog.querySelector(".rf-preview-close").addEventListener("click",()=>dialog.close());
+ dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close();});
+});
