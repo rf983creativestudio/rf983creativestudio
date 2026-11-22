@@ -168,3 +168,18 @@ document.addEventListener("DOMContentLoaded",()=>{
   visual.addEventListener("pointerleave",()=>{visual.style.setProperty("--hero-x","0");visual.style.setProperty("--hero-y","0");});
  }
 });
+
+
+/* RF983 project enquiry completeness indicator */
+document.addEventListener("DOMContentLoaded",()=>{
+ const form=document.querySelector("[data-enquiry]");
+ if(!form)return;
+ const bar=form.querySelector("[data-progress-bar]"),label=form.querySelector("[data-progress-label]");
+ const required=[...form.querySelectorAll("input[required],select[required],textarea[required]")];
+ const update=()=>{
+  const complete=required.filter(field=>field.type==="checkbox"?field.checked:field.value.trim()!=="").length;
+  const percent=Math.round(complete/Math.max(required.length,1)*100);
+  if(bar)bar.value=percent;if(label)label.textContent=percent+"% complete";
+ };
+ form.addEventListener("input",update);form.addEventListener("change",update);update();
+});
