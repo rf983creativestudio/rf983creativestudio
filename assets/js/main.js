@@ -214,6 +214,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(valid.length===1)serviceSelect.value=valid[0];
   else if(valid.length>1)serviceSelect.value="Multiple services";
   if(goalField&&!goalField.value.trim())goalField.value="I'm interested in exploring: "+valid.join(", ")+".\n\nMy project goals are: ";
+  serviceSelect.dispatchEvent(new Event("change",{bubbles:true}));
+  if(goalField)goalField.dispatchEvent(new Event("input",{bubbles:true}));
  }
 
  /* Cross-document View Transitions are progressive enhancement only. */
