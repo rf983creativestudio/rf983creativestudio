@@ -27,3 +27,10 @@
 .form-panel textarea{min-height:118px}
 .form-panel input::placeholder,.form-panel textarea::placeholder{color:#858ba0;font-size:12px}
 .form-panel .form-note{line-height:1.6}
+
+/* Additional portfolio concept artwork */
+.art-f{background:linear-gradient(135deg,#26333c,#d4a96b 58%,#f0dfbd);color:#17212a}.art-f strong{font-family:Georgia,serif;font-size:42px}
+.art-g{background:radial-gradient(circle at 80% 25%,#d6bd87 0 7%,transparent 8%),linear-gradient(135deg,#283d31,#78856b 58%,#d7c6a0)}.art-g strong{font-family:Georgia,serif;color:#f2ead8}
+.art-h{background:linear-gradient(135deg,#f0c7a6,#b96f51 55%,#6d3e35);color:#33231f}.art-h strong{font-family:Georgia,serif;font-size:44px}
+.art-i{background:radial-gradient(circle at 72% 42%,#edb84f 0 4%,transparent 5%),linear-gradient(130deg,#171c35,#533c78 58%,#bd6e63)}.art-i strong{font-family:Arial,sans-serif;font-weight:800;letter-spacing:-.05em}
+.art-j{background:linear-gradient(135deg,#1d352d,#60775d 58%,#c5b68e)}.art-j strong{font-family:Georgia,serif;color:#f1eadb}
