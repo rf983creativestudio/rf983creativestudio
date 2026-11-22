@@ -2,3 +2,19 @@ document.addEventListener("DOMContentLoaded",()=>{const menu=document.querySelec
 /* Creative Playground interactions */
 const pgCanvas=document.querySelector("#pg-canvas");
 if(pgCanvas){const title=document.querySelector("#pg-title"),subtitle=document.querySelector("#pg-subtitle"),outTitle=document.querySelector("#pg-out-title"),outSubtitle=document.querySelector("#pg-out-subtitle"),status=document.querySelector("#pg-status");const sync=()=>{outTitle.textContent=title.value.trim()||"Your idea here.";outSubtitle.textContent=subtitle.value.trim()||"Add a line to bring your idea to life.";};title.addEventListener("input",sync);subtitle.addEventListener("input",sync);document.querySelectorAll("[data-palette]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-palette]").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn));});pgCanvas.classList.remove("pg-gold","pg-electric","pg-earth","pg-sunset","pg-ice");pgCanvas.classList.add("pg-"+btn.dataset.palette);}));document.querySelectorAll("[data-type]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-type]").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn));});pgCanvas.classList.remove("pg-editorial","pg-modern","pg-expressive");pgCanvas.classList.add("pg-"+btn.dataset.type);}));document.querySelector("#pg-copy").addEventListener("click",async()=>{const palette=document.querySelector("[data-palette].active").textContent.trim(),type=document.querySelector("[data-type].active").textContent.trim(),summary="RF983 Creative Direction\nHeadline: "+(title.value.trim()||"Your idea here.")+"\nSupporting line: "+(subtitle.value.trim()||"Not set")+"\nColour mood: "+palette+"\nTypography: "+type;try{await navigator.clipboard.writeText(summary);status.textContent="Copied! Your creative direction is ready to share.";}catch(e){status.textContent=summary+" — Clipboard unavailable; copy the details manually.";}});}
+
+
+/* RF983 studio motion system: progressive enhancement + reduced-motion support */
+document.addEventListener("DOMContentLoaded",()=>{
+ const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const targets=document.querySelectorAll(".hero-text,.hero-visual,.intro-grid,.section-head,.service-card,.process-step,.statement .shell,.faq-list details,.portfolio-card,.page-hero .shell,.content>.notice,.case-section>.shell,.concept-case-hero .concept-case-grid,.concept-case-app,.pg-layout,.pg-bottom .shell,.closing");
+ if(reduceMotion||!("IntersectionObserver" in window)){targets.forEach(el=>el.classList.add("motion-visible"));}
+ else{
+  targets.forEach((el,index)=>{el.classList.add("motion-reveal");if(el.matches(".service-card,.process-step,.portfolio-card,.faq-list details,.concept-case-app"))el.style.setProperty("--motion-delay",(index%5)*65+"ms");});
+  const observer=new IntersectionObserver((entries,obs)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("motion-visible");obs.unobserve(entry.target);}});},{threshold:.12,rootMargin:"0px 0px -35px 0px"});
+  targets.forEach(el=>observer.observe(el));
+ }
+ if(!reduceMotion&&window.matchMedia("(pointer:fine)").matches){
+  document.querySelectorAll(".service-card,.portfolio-card,.concept-case-app").forEach(card=>card.addEventListener("pointermove",event=>{const rect=card.getBoundingClientRect();card.style.setProperty("--pointer-x",(event.clientX-rect.left)+"px");card.style.setProperty("--pointer-y",(event.clientY-rect.top)+"px");}));
+ }
+});
