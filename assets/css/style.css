@@ -361,3 +361,10 @@ body{overflow-x:hidden}
 @media(max-width:800px){.rf-signature-grid{grid-template-columns:1fr;gap:34px}.rf-signature-art{min-height:290px}}
 @media(max-width:520px){.pg-controls .pg-custom-colours{grid-template-columns:1fr}.rf-signature-section{padding:66px 0}}
 @media(prefers-reduced-motion:reduce){.rf-signature-art:before,.rf-signature-art:after,.rf-signature-art img{animation:none}}
+
+
+/* Signature phoenix motion — original artwork remains unchanged */
+.rf-signature-art img{animation:rfPhoenixRise 6.5s ease-in-out infinite}
+@keyframes rfPhoenixRise{0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 12px 32px rgba(212,175,55,.13))}50%{transform:translateY(-9px) scale(1.012);filter:drop-shadow(0 18px 42px rgba(212,175,55,.28))}}
+.rf-filter-count{margin:15px 0 0;color:var(--muted);font-size:11px;letter-spacing:.08em}
+@media(prefers-reduced-motion:reduce){.rf-signature-art img{animation:none}}
